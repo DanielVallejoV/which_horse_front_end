@@ -42,17 +42,21 @@ if uploaded_file is not None:
                 col_a, col_b, col_c, col_d = st.columns([1,1,1,1])              
                 with col_a:
                     st.metric('accuracy', f'{round(float(accuracy_score(results_df.y_true, results_df.y_pred))*100,0)} %')
-                    st.metric('Winner horses correctly predicted', tp)
+                    
                 with col_b:
                     st.metric('precision', f'{round(float(precision_score(results_df.y_true, results_df.y_pred))*100,0)} %')
-                    st.metric('Winner horses badly predicted', fp)
+                    
                 with col_c:
                     st.metric('recall', f'{round(float(recall_score(results_df.y_true, results_df.y_pred))*100,0)} %')
-                    st.metric('Loser horses correctly predicted', tn)
+                    
                 with col_d:
                     st.metric('f1', f'{round(float(f1_score(results_df.y_true, results_df.y_pred))*100,0)} %')
-                    st.metric('Loser horses badly predicted', fn)
-                              
+                    
+                
+                st.metric('Winner horses correctly predicted', tp)  
+                st.metric('Winner horses badly predicted', fp) 
+                st.metric('Loser horses correctly predicted', tn)  
+                st.metric('Loser horses badly predicted', fn)    
                 X_pred_transform
 
     except Exception as e:
