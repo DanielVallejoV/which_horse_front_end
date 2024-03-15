@@ -57,7 +57,7 @@ if uploaded_file is not None:
                 st.metric('Winner horses badly predicted', fp) 
                 st.metric('Loser horses correctly predicted', tn)  
                 st.metric('Loser horses badly predicted', fn)    
-                X_pred_transform
+                st.table(X_pred_transform)
 
     except Exception as e:
         st.error(f"Error: {e}")
