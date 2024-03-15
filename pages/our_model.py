@@ -37,8 +37,7 @@ if uploaded_file is not None:
                 print('Data transformed')
                 predct = model.predict(X_pred_transform)
                 results_df = pd.DataFrame({'y_pred': predct.round(2)[:,0], 'y_true': df_clean['win_or_lose'].replace(0.5, 1.0)})
-                results_df['y_pred'] = results_df.y_pred.map(lambda x: 1.0 if x>=0.5 else 0.0)
-                st.write(results_df)  
+                results_df['y_pred'] = results_df.y_pred.map(lambda x: 1.0 if x>=0.5 else 0.0) 
                 col_a, col_b, col_c, col_d = st.columns([1,1,1,1])              
                 with col_a:
                     st.metric('accuracy', f'{round(float(accuracy_score(results_df.y_true, results_df.y_pred))*100,0)} %')
