@@ -26,9 +26,6 @@ st.markdown("""
     section[data-testid="stSidebar"][aria-expanded="false"]{
         height: 10% !important;
     }
-    .st-emotion-cache-16txtl3 {
-        padding: 1rem 1.5rem;
-    }
     </style>""", unsafe_allow_html=True)
 # Your data loading and cleaning functions go here
 
