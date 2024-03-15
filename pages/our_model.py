@@ -36,14 +36,16 @@ if uploaded_file is not None:
             st.error("Error: Submitted file is empty")
         else:
             df_processed = df.copy()
-            st.success("Performing relevant checks and displaying metrics...")
+            st.success("Data loaded...")
             if st.button('Predict', on_click=click_button):
                 df_clean = clean_data(df)
+                st.success("Data cleaned...")
                 X_pred = df_clean.drop(columns=['bsp','event_number','meeting_id', 'win_or_lose', 'horse_id', 'place', '15_mins', '10_mins', '5_mins', '3_mins', '2_mins', '1_min_'])
                 print('Data cleaned')
                 pipe, model = load_pipe_model()
                 X_pred_transform = pd.DataFrame(pipe.transform(X_pred), columns= pd.Series(pipe.get_feature_names_out()).str.split('__', expand=True)[1])
                 df_processed = X_pred_transform.copy()
+                st.success("Data features processed...")
                 print('Data transformed')
                 predct = model.predict(X_pred_transform)
                 results_df = pd.DataFrame({'y_pred': predct.round(2)[:,0], 'y_true': df_clean['win_or_lose'].replace(0.5, 1.0)})
