@@ -69,7 +69,9 @@ if uploaded_file is not None:
                 st.metric('Winner horses correctly predicted', tp)  
                 st.metric('Winner horses badly predicted', fp) 
                 st.metric('Loser horses correctly predicted', tn)  
-                st.metric('Loser horses badly predicted', fn)    
+                st.metric('Loser horses badly predicted', fn) 
+                
+                st.write('Processed data:')   
                 df_processed
                 
             if st.button('Show raw data'):
