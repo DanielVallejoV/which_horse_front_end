@@ -67,12 +67,11 @@ if uploaded_file is not None:
                 st.metric('Winner horses badly predicted', fp) 
                 st.metric('Loser horses correctly predicted', tn)  
                 st.metric('Loser horses badly predicted', fn)    
-                
+                df_processed
                 
             if st.button('Show raw data'):
                 df
-            if st.button('Show processed data'):
-                df_processed
+           
 
     except Exception as e:
         st.error(f"Error: {e}")
