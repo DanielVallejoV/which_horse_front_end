@@ -41,13 +41,13 @@ if uploaded_file is not None:
                 st.write(results_df)  
                 col_a, col_b, col_c, col_d = st.columns([1,1,1,1])              
                 with col_a:
-                    st.metric('accuracy', f'{round(float(accuracy_score(results_df.y_true, results_df.y_pred))*100},0)} %')
+                    st.metric('accuracy', f'{round(float(accuracy_score(results_df.y_true, results_df.y_pred))*100,0)} %')
                 with col_b:
-                    st.metric('precision', f'{round(float(precision_score(results_df.y_true, results_df.y_pred))*100},0)} %')
+                    st.metric('precision', f'{round(float(precision_score(results_df.y_true, results_df.y_pred))*100,0)} %')
                 with col_c:
-                    st.metric('recall', f'{round(float(recall_score(results_df.y_true, results_df.y_pred))*100},0)} %')
+                    st.metric('recall', f'{round(float(recall_score(results_df.y_true, results_df.y_pred))*100,0)} %')
                 with col_d:
-                    st.metric('f1', f'{round(float(f1_score(results_df.y_true, results_df.y_pred))*100},0)} %')
+                    st.metric('f1', f'{round(float(f1_score(results_df.y_true, results_df.y_pred))*100,0)} %')
                               
                 X_pred_transform
 
