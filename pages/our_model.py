@@ -37,12 +37,12 @@ if uploaded_file is not None:
                 print('Data transformed')
                 predct = model.predict(X_pred_transform)
                 results_df = pd.DataFrame({'y_pred': predct.round(2)[:,0], 'y_true': df_clean['win_or_lose'].replace(0.5, 1.0)})
-                results_df['y_pred_050'] = results_df.y_pred.map(lambda x: 1.0 if x>=0.5 else 0.0)
+                results_df['y_pred'] = results_df.y_pred.map(lambda x: 1.0 if x>=0.5 else 0.0)
                 st.write(results_df)                
-                st.metric(f'##accuracy', round(float(accuracy_score(results_df.y_true, results_df.y_pred_050)),2))
-                st.metric(f'##precision', round(float(precision_score(results_df.y_true, results_df.y_pred_050)),2))
-                st.metric(f'##recall', round(float(recall_score(results_df.y_true, results_df.y_pred_050)),2))
-                st.metric(f'##f1', round(float(f1_score(results_df.y_true, results_df.y_pred_050)),2))
+                st.metric('accuracy', round(float(accuracy_score(results_df.y_true, results_df.y_pred_050)),2))
+                st.metric('precision', round(float(precision_score(results_df.y_true, results_df.y_pred_050)),2))
+                st.metric('recall', round(float(recall_score(results_df.y_true, results_df.y_pred_050)),2))
+                st.metric('f1', round(float(f1_score(results_df.y_true, results_df.y_pred_050)),2))
                               
                 X_pred_transform
 
