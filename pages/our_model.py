@@ -51,6 +51,7 @@ if uploaded_file is not None:
                 results_df = pd.DataFrame({'y_pred': predct.round(2)[:,0], 'y_true': df_clean['win_or_lose'].replace(0.5, 1.0)})
                 results_df['y_pred'] = results_df.y_pred.map(lambda x: 1.0 if x>=0.5 else 0.0) 
                 tn, fp, fn, tp = confusion_matrix(results_df.y_true, results_df.y_pred).ravel()
+                st.success("Predictions performance:")
                 col_a, col_b, col_c, col_d = st.columns([1,1,1,1])              
                 with col_a:
                     st.metric('accuracy', f'{round(float(accuracy_score(results_df.y_true, results_df.y_pred))*100,0)} %')
