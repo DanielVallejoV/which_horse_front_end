@@ -31,6 +31,7 @@ uploaded_file = st.file_uploader("Choose a csv file", type='csv')
 if uploaded_file is not None:
     try:
         df = pd.read_csv(uploaded_file)
+        df_processed = df.copy()
         if df.empty:
             st.error("Error: Submitted file is empty")
         else:
@@ -64,11 +65,12 @@ if uploaded_file is not None:
                 st.metric('Winner horses badly predicted', fp) 
                 st.metric('Loser horses correctly predicted', tn)  
                 st.metric('Loser horses badly predicted', fn)    
+                df_processed = X_pred_transform.copy()
                 
             if st.button('Show raw data'):
                 df
             if st.button('Show processed data'):
-                X_pred_transform
+                df_processed
 
     except Exception as e:
         st.error(f"Error: {e}")
