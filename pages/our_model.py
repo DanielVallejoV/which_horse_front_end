@@ -19,8 +19,15 @@ st.markdown("""
     }
     </style>""", unsafe_allow_html=True)
 
+if 'clicked' not in st.session_state:
+    st.session_state.clicked = False
+
+def click_button():
+    st.session_state.clicked = True
+
 uploaded_file = st.file_uploader("Choose a csv file", type='csv')
 # st.write(pipeline.get_feature_names_out())
+
 if uploaded_file is not None:
     try:
         df = pd.read_csv(uploaded_file)
@@ -28,7 +35,7 @@ if uploaded_file is not None:
             st.error("Error: Submitted file is empty")
         else:
             st.success("Performing relevant checks and displaying metrics...")
-            if st.button('Predict'):
+            if st.button('Predict', on_click=click_button):
                 df_clean = clean_data(df)
                 X_pred = df_clean.drop(columns=['bsp','event_number','meeting_id', 'win_or_lose', 'horse_id', 'place', '15_mins', '10_mins', '5_mins', '3_mins', '2_mins', '1_min_'])
                 print('Data cleaned')
