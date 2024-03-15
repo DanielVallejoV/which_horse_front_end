@@ -31,10 +31,11 @@ uploaded_file = st.file_uploader("Choose a csv file", type='csv')
 if uploaded_file is not None:
     try:
         df = pd.read_csv(uploaded_file)
-        df_processed = df.copy()
+        
         if df.empty:
             st.error("Error: Submitted file is empty")
         else:
+            df_processed = df.copy()
             st.success("Performing relevant checks and displaying metrics...")
             if st.button('Predict', on_click=click_button):
                 df_clean = clean_data(df)
@@ -42,6 +43,7 @@ if uploaded_file is not None:
                 print('Data cleaned')
                 pipe, model = load_pipe_model()
                 X_pred_transform = pd.DataFrame(pipe.transform(X_pred), columns= pd.Series(pipe.get_feature_names_out()).str.split('__', expand=True)[1])
+                df_processed = X_pred_transform.copy()
                 print('Data transformed')
                 predct = model.predict(X_pred_transform)
                 results_df = pd.DataFrame({'y_pred': predct.round(2)[:,0], 'y_true': df_clean['win_or_lose'].replace(0.5, 1.0)})
@@ -65,7 +67,7 @@ if uploaded_file is not None:
                 st.metric('Winner horses badly predicted', fp) 
                 st.metric('Loser horses correctly predicted', tn)  
                 st.metric('Loser horses badly predicted', fn)    
-                df_processed = X_pred_transform.copy()
+                
                 
             if st.button('Show raw data'):
                 df
